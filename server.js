@@ -17,7 +17,7 @@ mongoose.connect(
 );
 
 app.get('/', function (req, res) {
-  res.send('Hello World')
+  res.send('"Curse the fiends, their children too. And their children, forever, true" - villagers of the Fishing Hamlet ')
 });
 
 app.get('/anime', getAnime);
@@ -34,5 +34,5 @@ app.delete('/otakuzUser/:id', otakuzController.deleteAnime);
 
 
 app.listen(Port, () => {
-  console.log(`server is ${Port}`);
+  console.log(`server starts at port ${Port}`);
 })
