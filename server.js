@@ -20,17 +20,18 @@ app.get('/', function (req, res) {
   res.send('"Curse the fiends, their children too. And their children, forever, true" - villagers of the Fishing Hamlet ')
 });
 
+// JIKAN  api 
 app.get('/anime', getAnime);
-
-app.post('/user', otakuzController.createUser);
-
-app.delete('/delete/:id', otakuzController.deleteUser);
-
+// add user to data base
+app.post('/otakuzUser', otakuzController.createUser);
+// delete user from data base
+app.delete('/otakuzUser/:id', otakuzController.deleteUser);
+// get a user from data base
 app.get('/otakuzUser', otakuzController.getUser);
-
-app.post('/otakuzUser', otakuzController.addAnime);
-
-app.delete('/otakuzUser/:id', otakuzController.deleteAnime);
+// add anime to a user list in data base
+app.post('/otakuzUser/user-list', otakuzController.addAnime);
+// delete anime from a user in data base
+app.delete('/otakuzUser/user-list/:id', otakuzController.deleteAnime);
 
 
 app.listen(Port, () => {
