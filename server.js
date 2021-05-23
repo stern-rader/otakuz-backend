@@ -3,6 +3,7 @@ const cors = require('cors');
 require('dotenv').config();
 const mongoose = require('mongoose');
 const getAnime = require('./components/anime');
+const getTopAnimes = require('./components/getTopAnimes');
 const otakuzController = require('./controllers/otakuzUser.controller');
 
 const app = express();
@@ -22,6 +23,8 @@ app.get('/', function (req, res) {
 
 // JIKAN  api 
 app.get('/anime', getAnime);
+
+app.get('/topAnimes', getTopAnimes);
 // add user to data base
 app.post('/otakuzUser', otakuzController.createUser);
 // delete user from data base
