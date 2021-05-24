@@ -18,7 +18,7 @@ const createUser = (email) => {
 };
 
 // get a user from data base
-const getUser = async (req, res) => {
+const getUserList = async (req, res) => {
   const { email } = req.query;
   await otakuzUserModel.find({ email: email }, (err, user) => {
     if(!user[0]) createUser(email) ;
@@ -31,6 +31,11 @@ const getUser = async (req, res) => {
     res.status(200).send(user[0].list)
   });
 };
+
+// get user anime id
+// const getUserId = async (req, res) => {
+
+// };
 
 //add anime to user list
 const addAnime = async (req, res) => {
@@ -64,7 +69,7 @@ const deleteAnime = async (req, res) => {
   const {email} = req.query;
   await otakuzUserModel.find({email: email}, (err, user) => {
     if (err) { return res.status(404).send() }
-    const newList = user[0].list.filter(elm => elm.name !== id);
+    const newList = user[0].list.filter(elm => elm._id != id);
     user[0].list = newList;
     user[0].save();
     res.status(200).send(user[0].list);
@@ -83,7 +88,7 @@ const deleteUser = async (req, res) =>{
 
 module.exports = {
   createUser,
-  getUser,
+  getUserList,
   addAnime,
   deleteAnime,
   deleteUser,
