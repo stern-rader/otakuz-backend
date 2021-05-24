@@ -35,12 +35,10 @@ app.get('/topAnimes', getTopAnimes);
 
 // add user to data base
 app.post('/otakuzUser', otakuzController.createUser);
-// delete user from data base
-app.delete('/otakuzUser/:id', otakuzController.deleteUser);
-// get user id from data base
-// app.get('otakuzUser/id', otakuzController.getUserId);
 // get a user list from data base
 app.get('/otakuzUser', otakuzController.getUserList);
+// delete user from data base
+app.delete('/otakuzUser/:id', otakuzController.deleteUser);
 // add anime to a user list in data base
 app.post('/otakuzUser/user-list', otakuzController.addAnime);
 // delete anime from a user in data base
