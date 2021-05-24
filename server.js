@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const getAnime = require('./components/anime');
 const getTopAnimes = require('./components/getTopAnimes');
 const getAnimeByGenre = require('./components/animeGenre');
+const getTopAnimeByType = require('./components/getTopAnimeByType');
 const otakuzController = require('./controllers/otakuzUser.controller');
 
 const app = express();
@@ -25,9 +26,13 @@ app.get('/', function (req, res) {
 // JIKAN api (search by name)
 app.get('/anime', getAnime);
 // JIKAN api (by genre)
-app.get('/genre/:genre', getAnimeByGenre);
+app.get('/anime/genre/:genre', getAnimeByGenre);
+// JIKAN api (search top anime by type)
+app.get('/anime/top/:type', getTopAnimeByType);
 // JIKAN api (top anime)
 app.get('/topAnimes', getTopAnimes);
+
+
 // add user to data base
 app.post('/otakuzUser', otakuzController.createUser);
 // delete user from data base
