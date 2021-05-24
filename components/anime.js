@@ -1,6 +1,6 @@
 'use strict';
 const superagent = require('superagent');
-const cache = require('../modules/cache');
+const cache = require('../modules/animeCache');
 
 const getAnime = (req, res) => {
   // console.log(res);
@@ -23,7 +23,7 @@ const getAnime = (req, res) => {
 
 class Anime {
   constructor(data) {
-    this.name = data.title,
+      this.name = data.title,
       this.url = data.url,
       this.img = data.image_url,
       this.description = data.synopsis,
