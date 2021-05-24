@@ -7,16 +7,31 @@ const getTopAnimes = require('./components/getTopAnimes');
 const getAnimeByGenre = require('./components/animeGenre');
 const getTopAnimeByType = require('./components/getTopAnimeByType');
 const otakuzController = require('./controllers/otakuzUser.controller');
+const doComment = require('./controllers/comments');
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
+// const multer = require('multer');
+// //
+// const storage = multer.diskStorage({
+//   destination: (req, file, cb) => {
+//     cb(null, 'uploads')
+//   },
+//   filename: (req, file, cb) => {
+//     cb(null, file.fieldname + '-' + Date.now())
+//   }
+// });
+
+// const upload = multer({ storage: storage });
+//
+
 const Port = process.env.PORT || 3666;
 
 mongoose.connect(
   `${process.env.MONGO_DB_URL}/otakuzUser`,
-  { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true}
+  { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }
 );
 
 app.get('/', function (req, res) {
@@ -31,6 +46,8 @@ app.get('/anime/genre/:genre', getAnimeByGenre);
 app.get('/anime/top/:type', getTopAnimeByType);
 // JIKAN api (top anime)
 app.get('/topAnimes', getTopAnimes);
+// add comments 
+app.post('/do-comment', doComment);
 
 
 // add user to data base
