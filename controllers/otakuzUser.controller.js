@@ -1,6 +1,6 @@
 'use strict';
 const otakuzUserModel = require('../models/otakuzUser.model');
-
+var ObjectId = require('mongodb').ObjectId; 
 // crate new user
 // const createUser = (req, res) => {
 //   const { email } = req.body;
@@ -33,7 +33,7 @@ const getUser = async (req, res) => {
 
 //add anime to user list
 const addAnime = async (req, res) => {
-  const { email, name, url, img, description, rating, type, rate, start, end, followers } = req.body;
+  const { email, name, url, img, description, rating, type, rate, start, end, followers , id} = req.body;
   await otakuzUserModel.find({ email: email }, (err, user) => {
     if(!user[0]) createUser(email) ;
     console.log(user[0]);
@@ -50,7 +50,8 @@ const addAnime = async (req, res) => {
       rate: rate,
       start: start,
       end: end,
-      followers: followers
+      followers: followers,
+      id:id,
     }); 
     user[0].save();
     res.send(user[0].list);
@@ -59,9 +60,12 @@ const addAnime = async (req, res) => {
 
 // delete an anime from a user
 const deleteAnime = async (req, res) => {
-  const index = Number(req.params.id);
+  const index = req.params.id;
+  console.log('object id ______________' , index);
   const {email} = req.query;
-  await otakuzUserModel.find({email: email}, (err, user) => {
+  var o_id = new ObjectId(index);
+  await otakuzUserModel.findOne({id:index}, (err, user) => {
+    console.log('after search delete' ,user[0] );
     if (err) { return res.status(404).send() }
     const newList = user[0].list.filter((elm, idx) => idx !== index);
     user[0].list = newList;

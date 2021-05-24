@@ -12,6 +12,7 @@ const animeSchema = new mongoose.Schema({
     start: String,
     end: String,
     followers: Number,
+    id:String
   });
   
   const animeListModel = mongoose.model('lists', animeSchema);
