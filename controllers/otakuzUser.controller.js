@@ -21,7 +21,7 @@ const createUser = (email) => {
 const getUserList = async (req, res) => {
   const { email } = req.query;
   await otakuzUserModel.find({ email: email }, (err, user) => {
-    if(!user[0]) createUser(email) ;
+    if (!user[0]) createUser(email);
     // console.log('in create',user[0])
   });
 
@@ -32,16 +32,11 @@ const getUserList = async (req, res) => {
   });
 };
 
-// get user anime id
-// const getUserId = async (req, res) => {
-
-// };
-
 //add anime to user list
 const addAnime = async (req, res) => {
   const { email, name, url, img, description, rating, type, rate, start, end, followers } = req.body;
   await otakuzUserModel.find({ email: email }, (err, user) => {
-    if(!user[0]) createUser(email) ;
+    if (!user[0]) createUser(email);
     // console.log(user[0]);
   });
   await otakuzUserModel.find({ email: email }, (err, user) => {
@@ -57,7 +52,7 @@ const addAnime = async (req, res) => {
       start: start,
       end: end,
       followers: followers
-    }); 
+    });
     user[0].save();
     res.send(user[0].list);
   })
@@ -66,21 +61,22 @@ const addAnime = async (req, res) => {
 // delete an anime from a user
 const deleteAnime = async (req, res) => {
   const id = req.params.id;
-  const {email} = req.query;
-  await otakuzUserModel.find({email: email}, (err, user) => {
+  const { email } = req.query;
+  await otakuzUserModel.find({ email: email }, (err, user) => {
     if (err) { return res.status(404).send() }
-    const newList = user[0].list.filter(elm => elm._id != id);
+    const newList = user[0].list.remove({ _id: id });
     user[0].list = newList;
     user[0].save();
     res.status(200).send(user[0].list);
   });
 };
 
+
 // delete a user
-const deleteUser = async (req, res) =>{
+const deleteUser = async (req, res) => {
   const id = req.params.id;
-  const {email} = req.query;
-  await otakuzUserModel.findOneAndRemove({email: email}, (err, user)=>{
+  const { email } = req.query;
+  await otakuzUserModel.findOneAndRemove({ email: email }, (err, user) => {
     if (err) { return res.status(500).send() }
     return res.status(200).send('user deleted');
   });
