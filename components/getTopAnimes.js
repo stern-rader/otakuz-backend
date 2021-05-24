@@ -19,15 +19,15 @@ const getTopAnimes = (req, res) => {
 class Anime {
   constructor(data) {
     this.name = data.title,
-      this.url = data.url,
-      this.img = data.image_url,
-      this.description = data.synopsis,
-      this.rating = data.score,
-      this.type = data.type,
-      this.rate = data.rated,
-      this.start = data.start_date,
-      this.end = data.end_date,
-      this.followers = data.members
+    this.url = data.url,
+    this.img = data.image_url,
+    this.description = data.synopsis,
+    this.rating = data.score,
+    this.type = data.type,
+    this.rate = data.rated,
+    this.start = data.start_date,
+    this.end = data.end_date,
+    this.followers = data.members
   }
 }
 

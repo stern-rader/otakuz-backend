@@ -1,4 +1,5 @@
 'use strict';
+const { json } = require('express');
 const otakuzUserModel = require('../models/otakuzUser.model');
 
 // crate new user
@@ -21,12 +22,12 @@ const getUser = async (req, res) => {
   const { email } = req.query;
   await otakuzUserModel.find({ email: email }, (err, user) => {
     if(!user[0]) createUser(email) ;
-    console.log('in create',user[0])
+    // console.log('in create',user[0])
   });
 
   await otakuzUserModel.find({ email: email }, (err, user) => {
     if (err) { return res.status(404).send() }
-    console.log('get from profile' ,user[0]);
+    // console.log('get from profile' ,user[0]);
     res.status(200).send(user[0].list)
   });
 };
@@ -36,7 +37,7 @@ const addAnime = async (req, res) => {
   const { email, name, url, img, description, rating, type, rate, start, end, followers } = req.body;
   await otakuzUserModel.find({ email: email }, (err, user) => {
     if(!user[0]) createUser(email) ;
-    console.log(user[0]);
+    // console.log(user[0]);
   });
   await otakuzUserModel.find({ email: email }, (err, user) => {
     if (err) { return res.status(404).send() }
@@ -59,11 +60,11 @@ const addAnime = async (req, res) => {
 
 // delete an anime from a user
 const deleteAnime = async (req, res) => {
-  const index = Number(req.params.id);
+  const id = req.params.id;
   const {email} = req.query;
   await otakuzUserModel.find({email: email}, (err, user) => {
     if (err) { return res.status(404).send() }
-    const newList = user[0].list.filter((elm, idx) => idx !== index);
+    const newList = user[0].list.filter(elm => elm.name !== id);
     user[0].list = newList;
     user[0].save();
     res.status(200).send(user[0].list);
