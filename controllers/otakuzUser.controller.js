@@ -1,5 +1,5 @@
 'use strict';
-const { json } = require('express');
+
 const otakuzUserModel = require('../models/otakuzUser.model');
 var ObjectId = require('mongodb').ObjectId; 
 // crate new user
@@ -34,7 +34,7 @@ const getUserList = async (req, res) => {
 
 //add anime to user list
 const addAnime = async (req, res) => {
-  const { email, name, url, img, description, rating, type, rate, start, end, followers , id} = req.body;
+  const { email, id, name, url, img, description, rating, type, rate, start, end, followers } = req.body;
   await otakuzUserModel.find({ email: email }, (err, user) => {
     if (!user[0]) createUser(email);
     // console.log(user[0]);
@@ -42,6 +42,7 @@ const addAnime = async (req, res) => {
   await otakuzUserModel.find({ email: email }, (err, user) => {
     if (err) { return res.status(404).send() }
     user[0].list.push({
+      id: id,
       name: name,
       url: url,
       img: img,

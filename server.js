@@ -1,26 +1,30 @@
 const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
+const { json } = require('express');
 const mongoose = require('mongoose');
 const getAnime = require('./components/anime');
 const getTopAnimes = require('./components/getTopAnimes');
 const getAnimeByGenre = require('./components/animeGenre');
 const getTopAnimeByType = require('./components/getTopAnimeByType');
+const reviews = require('./controllers/reviews.controller');
 const otakuzController = require('./controllers/otakuzUser.controller');
-const doComment = require('./controllers/comments');
+
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-
-
 const Port = process.env.PORT || 3666;
 
 mongoose.connect(
-  `${process.env.MONGO_DB_URL}/otakuzUser`,
-  { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }
+  `${process.env.MONGO_DB_URL}/otakuz`,
+  { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true}
 );
+// mongoose.connect(
+//   `${process.env.MONGO_DB_URL}/otakuzReviews`,
+//   { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true}
+// );
 
 app.get('/', function (req, res) {
   res.send('"Curse the fiends, their children too. And their children, forever, true" - villagers of the Fishing Hamlet ')
@@ -34,8 +38,6 @@ app.get('/anime/genre/:genre', getAnimeByGenre);
 app.get('/anime/top/:type', getTopAnimeByType);
 // JIKAN api (top anime)
 app.get('/topAnimes', getTopAnimes);
-// add comments 
-app.post('/do-comment', doComment);
 
 
 // add user to data base
@@ -48,6 +50,9 @@ app.delete('/otakuzUser/:id', otakuzController.deleteUser);
 app.post('/otakuzUser/user-list', otakuzController.addAnime);
 // delete anime from a user in data base
 app.delete('/otakuzUser/user-list/:id', otakuzController.deleteAnime);
+// save user comments on an anime
+app.post('/reviews', reviews.postComment);
+
 
 
 app.listen(Port, () => {

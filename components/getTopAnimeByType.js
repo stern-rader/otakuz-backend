@@ -21,6 +21,7 @@ if(cache[type]){
 
 class Top {
   constructor(data) {
+      this.id = data.mal_id,
       this.name = data.title,
       this.url = data.url,
       this.img = data.image_url,

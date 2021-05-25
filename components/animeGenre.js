@@ -21,6 +21,7 @@ if(cache[genre]){
 
 class Genre {
   constructor(data) {
+      this.id = data.mal_id,
       this.name = data.title,
       this.url = data.url,
       this.img = data.image_url,
