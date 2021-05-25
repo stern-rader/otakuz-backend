@@ -18,7 +18,7 @@ app.use(express.json());
 const Port = process.env.PORT || 3666;
 
 mongoose.connect(
-  `${process.env.MONGO_DB_URL}/otakuzUser`,
+  `${process.env.MONGO_DB_URL}/otakuz`,
   { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }
 );
 
@@ -37,6 +37,7 @@ app.get('/anime/top/:type', getTopAnimeByType);
 app.get('/topAnimes', getTopAnimes);
 
 app.get('/do-review', getanimebyid);
+
 // Data Base
 // add user to data base
 app.post('/otakuzUser', otakuzController.createUser);
