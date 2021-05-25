@@ -23,6 +23,7 @@ const getAnime = (req, res) => {
 
 class Anime {
   constructor(data) {
+      this.id = data.mal_id,
       this.name = data.title,
       this.url = data.url,
       this.img = data.image_url,
