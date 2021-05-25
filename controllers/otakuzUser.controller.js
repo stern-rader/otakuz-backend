@@ -61,11 +61,11 @@ const addAnime = async (req, res) => {
 
 // delete an anime from a user
 const deleteAnime = async (req, res) => {
-  const id = req.params.id;
+  const id = Number(req.params.id);
   const { email } = req.query;
   await otakuzUserModel.find({ email: email }, (err, user) => {
     if (err) { return res.status(404).send() }
-    const newList = user[0].list.remove({ _id: id });
+    const newList = user[0].list.filter(anime => anime.id !== id);
     user[0].list = newList;
     user[0].save();
     res.status(200).send(user[0].list);
@@ -88,5 +88,5 @@ module.exports = {
   getUserList,
   addAnime,
   deleteAnime,
-  deleteUser,
+  deleteUser
 };
