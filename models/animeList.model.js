@@ -2,48 +2,41 @@
 const mongoose = require('mongoose');
 
 const animeSchema = new mongoose.Schema({
-    name: {
-      type: String,
-      unique: true
-    },
-    url: {
-      type: String,
-      unique: true
-    },
-    img: {
-      type: String,
-      unique: true
-    },
-    description: {
-      type: String,
-      unique: true
-    },
-    rating: {
-      type: Number,
-      unique: true
-    },
-    type: {
-      type: String,
-      unique: true
-    },
-    rate: {
-      type: String,
-      unique: true
-    },
-    start: {
-      type: String,
-      unique: true
-    },
-    end: {
-      type: String,
-      unique: true
-    },
-    followers: {
-      type: Number,
-      unique: true
-    },
-  });
-  
-  const animeListModel = mongoose.model('lists', animeSchema);
+  id: {
+    type: Number
+  },
+  name: {
+    type: String
+  },
+  url: {
+    type: String
+  },
+  img: {
+    type: String
+  },
+  description: {
+    type: String
+  },
+  rating: {
+    type: Number
+  },
+  type: {
+    type: String
+  },
+  rate: {
+    type: String
+  },
+  start: {
+    type: String
+  },
+  end: {
+    type: String
+  },
+  followers: {
+    type: Number
+  },
+});
 
-  module.exports = animeSchema
+const animeListModel = mongoose.model('lists', animeSchema);
+
+module.exports = animeSchema

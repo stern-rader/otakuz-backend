@@ -9,7 +9,7 @@ const otakuzUserSchema = new mongoose.Schema({
     lowercase: true,
     trim: true
   },
-  list: [animeSchema]
+  list: [animeSchema],
 });
 
 const otakuzUserModel = mongoose.model('users', otakuzUserSchema);
