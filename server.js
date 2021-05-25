@@ -7,6 +7,7 @@ const getTopAnimes = require('./components/getTopAnimes');
 const getAnimeByGenre = require('./components/animeGenre');
 const getTopAnimeByType = require('./components/getTopAnimeByType');
 const otakuzController = require('./controllers/otakuzUser.controller');
+const reviews = require('./controllers/reviews.controller');
 const getanimebyid = require('./components/animieDetails');
 // const doComment = require('./controllers/comments');
 
@@ -51,9 +52,9 @@ app.post('/otakuzUser/user-list', otakuzController.addAnime);
 app.delete('/otakuzUser/user-list/:id', otakuzController.deleteAnime);
 // get anime reviews from data base
 app.get('/reviews', reviews.getComments);
-// save user comments on an anime in data base
+// // save user comments on an anime in data base
 app.post('/reviews', reviews.postComment);
-// delete a review made by a user
+// // delete a review made by a user
 app.delete('/reviews/:id', reviews.deleteComment);
 
 
