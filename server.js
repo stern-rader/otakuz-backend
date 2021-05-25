@@ -13,19 +13,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// const multer = require('multer');
-// //
-// const storage = multer.diskStorage({
-//   destination: (req, file, cb) => {
-//     cb(null, 'uploads')
-//   },
-//   filename: (req, file, cb) => {
-//     cb(null, file.fieldname + '-' + Date.now())
-//   }
-// });
 
-// const upload = multer({ storage: storage });
-//
 
 const Port = process.env.PORT || 3666;
 
