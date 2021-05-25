@@ -4,7 +4,7 @@ const reviewsModel = require('../models/reviews.model');
 
 // save users comments in data base and save anime reviews if undefined
 const postComment = async (req, res) => {
-  const { id, email, comment } = req.body;
+  const { id, email, comment, date } = req.body;
   await reviewsModel.find({ id: id }, (err, anime) => {
     if (!anime[0]) {
       const anime = new reviewsModel({ id: id });
@@ -15,7 +15,8 @@ const postComment = async (req, res) => {
     if (err) { return res.status(404).send(); }
     anime[0].reviews.push({
       email: email,
-      comment: comment
+      comment: comment,
+      date: date
     });
     anime[0].save();
     res.status(200).send(anime[0].reviews);
@@ -40,19 +41,19 @@ const getComments = async (req, res) => {
 
 
 // delete a review made by a user
-const deleteComment = async (req, res) => {
-  const { commentId } = req.query;
-  const { id } = req.params;
-  await reviewsModel.find({ id: id }, (err, anime) => {
-    const newReviews = anime[0].reviews.remove({ _id: commentId });
-    anime[0].reviews = newReviews;
-    anime[0].save();
-    res.status(200).send(anime[0].reviews);
-  });
-};
+// const deleteComment = async (req, res) => {
+//   const { commentId } = req.query;
+//   const { id } = req.params;
+//   await reviewsModel.find({ id: id }, (err, anime) => {
+//     const newReviews = anime[0].reviews.remove({ _id: commentId });
+//     anime[0].reviews = newReviews;
+//     anime[0].save();
+//     res.status(200).send(anime[0].reviews);
+//   });
+// };
 
 module.exports = {
   postComment,
   getComments,
-  deleteComment,
+  // deleteComment,
 };

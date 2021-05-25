@@ -8,13 +8,12 @@ const getAnimeByGenre = require('./components/animeGenre');
 const getTopAnimeByType = require('./components/getTopAnimeByType');
 const otakuzController = require('./controllers/otakuzUser.controller');
 const getanimebyid = require('./components/animieDetails');
+const reviews = require('./controllers/reviews.controller');
 // const doComment = require('./controllers/comments');
 
 const app = express();
 app.use(cors());
 app.use(express.json());
-
-
 
 const Port = process.env.PORT || 3666;
 
@@ -54,7 +53,7 @@ app.get('/reviews', reviews.getComments);
 // save user comments on an anime in data base
 app.post('/reviews', reviews.postComment);
 // delete a review made by a user
-app.delete('/reviews/:id', reviews.deleteComment);
+// app.delete('/reviews/:id', reviews.deleteComment);
 
 
 app.listen(Port, () => {
