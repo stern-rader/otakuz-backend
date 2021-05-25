@@ -51,14 +51,8 @@ const addAnime = async (req, res) => {
       rate: rate,
       start: start,
       end: end,
-<<<<<<< HEAD
-      followers: followers,
-      id:id,
-    }); 
-=======
       followers: followers
     });
->>>>>>> 80dc51ce58e2bf989b4351bba84fb64241415cb9
     user[0].save();
     res.send(user[0].list);
   })

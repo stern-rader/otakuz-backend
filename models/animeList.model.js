@@ -2,19 +2,6 @@
 const mongoose = require('mongoose');
 
 const animeSchema = new mongoose.Schema({
-<<<<<<< HEAD
-    name: String,
-    url: String,
-    img: String,
-    description: String,
-    rating: Number,
-    type: String,
-    rate: String,
-    start: String,
-    end: String,
-    followers: Number,
-    id:String
-=======
     name: {
       type: String,
       unique: true
@@ -55,7 +42,6 @@ const animeSchema = new mongoose.Schema({
       type: Number,
       unique: true
     },
->>>>>>> 80dc51ce58e2bf989b4351bba84fb64241415cb9
   });
   
   const animeListModel = mongoose.model('lists', animeSchema);
