@@ -1,25 +1,26 @@
 const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
-const { json } = require('express');
 const mongoose = require('mongoose');
 const getAnime = require('./components/anime');
 const getTopAnimes = require('./components/getTopAnimes');
 const getAnimeByGenre = require('./components/animeGenre');
 const getTopAnimeByType = require('./components/getTopAnimeByType');
-const reviews = require('./controllers/reviews.controller');
 const otakuzController = require('./controllers/otakuzUser.controller');
-
+const getanimebyid = require('./components/animieDetails');
+// const doComment = require('./controllers/comments');
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
+
+
 const Port = process.env.PORT || 3666;
 
 mongoose.connect(
-  `${process.env.MONGO_DB_URL}/otakuz`,
-  { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true}
+  `${process.env.MONGO_DB_URL}/otakuzUser`,
+  { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }
 );
 
 app.get('/', function (req, res) {
@@ -36,6 +37,7 @@ app.get('/anime/top/:type', getTopAnimeByType);
 // JIKAN api (top anime)
 app.get('/topAnimes', getTopAnimes);
 
+app.get('/do-review', getanimebyid);
 // Data Base
 // add user to data base
 app.post('/otakuzUser', otakuzController.createUser);
