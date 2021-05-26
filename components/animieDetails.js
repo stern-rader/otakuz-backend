@@ -10,8 +10,8 @@ const getAnimeBYId = (req, res) => {
     for (const key in data.body) {
       console.log(`${key}: ${data.body[key]}`);
       backData = new AnimeByID(data.body);
-      console.log(backData);
     }
+    res.send(backData);
   });
 }
 

@@ -36,7 +36,7 @@ app.get('/anime/top/:type', getTopAnimeByType);
 // JIKAN api (top anime)
 app.get('/topAnimes', getTopAnimes);
 
-app.get('/do-review', getanimebyid);
+app.get('/do-review/:id', getanimebyid);
 
 // Data Base
 // add user to data base
