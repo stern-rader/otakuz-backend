@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 
 const commentSchema = new mongoose.Schema({
     email: String,
-    comment: String
+    comment: String,
+    date: String
 });
 
 const reviewSchema = new mongoose.Schema({

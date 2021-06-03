@@ -7,20 +7,18 @@ const getTopAnimes = require('./components/getTopAnimes');
 const getAnimeByGenre = require('./components/animeGenre');
 const getTopAnimeByType = require('./components/getTopAnimeByType');
 const otakuzController = require('./controllers/otakuzUser.controller');
-const reviews = require('./controllers/reviews.controller');
 const getanimebyid = require('./components/animieDetails');
+const reviews = require('./controllers/reviews.controller');
 // const doComment = require('./controllers/comments');
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-
-
 const Port = process.env.PORT || 3666;
 
 mongoose.connect(
-  `${process.env.MONGO_DB_URL}/otakuzUser`,
+  `${process.env.MONGO_DB_URL}/otakuz`,
   { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }
 );
 
@@ -39,6 +37,7 @@ app.get('/anime/top/:type', getTopAnimeByType);
 app.get('/topAnimes', getTopAnimes);
 
 app.get('/do-review', getanimebyid);
+
 // Data Base
 // add user to data base
 app.post('/otakuzUser', otakuzController.createUser);
@@ -54,8 +53,8 @@ app.delete('/otakuzUser/user-list/:id', otakuzController.deleteAnime);
 app.get('/reviews', reviews.getComments);
 // // save user comments on an anime in data base
 app.post('/reviews', reviews.postComment);
-// // delete a review made by a user
-app.delete('/reviews/:id', reviews.deleteComment);
+// delete a review made by a user
+// app.delete('/reviews/:id', reviews.deleteComment);
 
 
 app.listen(Port, () => {
