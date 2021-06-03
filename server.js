@@ -51,7 +51,7 @@ app.post('/otakuzUser/user-list', otakuzController.addAnime);
 app.delete('/otakuzUser/user-list/:id', otakuzController.deleteAnime);
 // get anime reviews from data base
 app.get('/reviews', reviews.getComments);
-// save user comments on an anime in data base
+// // save user comments on an anime in data base
 app.post('/reviews', reviews.postComment);
 // delete a review made by a user
 // app.delete('/reviews/:id', reviews.deleteComment);
