@@ -1,12 +1,18 @@
 'use strict';
 const reviewsModel = require('../models/reviews.model');
+const mongoose = require('mongoose');
 
-
+require('dotenv').config();
+mongoose.connect(
+    `${process.env.MONGO_DB_URL}/otakuz`,
+    { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }
+  );
 // save users comments in data base and save anime reviews if undefined
 const postComment = async (req, res) => {
   const { id, email, comment, date } = req.body;
+  console.log('body data' , req.body);
   await reviewsModel.find({ id: id }, (err, anime) => {
-    if (!anime[0]) {
+    if (anime.length <= 0) {
       const anime = new reviewsModel({ id: id });
       anime.save();
     }
@@ -26,9 +32,10 @@ const postComment = async (req, res) => {
 
 // get anime reviews from data base
 const getComments = async (req, res) => {
-  const { id } = req.query
+  const { id } = req.query;
+  console.log('query id' , id);
   await reviewsModel.find({ id: id }, (err, anime) => {
-    if (!anime[0]) {
+    if (anime.length <= 0) {
       const anime = new reviewsModel({ id: id });
       anime.save();
     };

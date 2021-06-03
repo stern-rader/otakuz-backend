@@ -4,16 +4,14 @@ const cache = require('../modules/animeCache');
 
 const getAnimeBYId = (req, res) => {
   const anime_id = req.query.id;
-  console.log('id from front end' , req.query);
   let backData = [];
   const url = (`https://api.jikan.moe/v3/anime/${anime_id}`);
   superagent.get(url).then(data => {
     for (const key in data.body) {
       console.log(`${key}: ${data.body[key]}`);
       backData = new AnimeByID(data.body);
-      // console.log(backData);
-      res.send(backData);
     }
+    res.send(backData);
   });
 }
 

@@ -1,7 +1,14 @@
 'use strict';
 
 const otakuzUserModel = require('../models/otakuzUser.model');
-var ObjectId = require('mongodb').ObjectId; 
+const mongoose = require('mongoose');
+
+require('dotenv').config();
+mongoose.connect(
+    `${process.env.MONGO_DB_URL}/otakuz`,
+    { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }
+  );
+// var ObjectId = require('mongodb').ObjectId; 
 // crate new user
 // const createUser = (req, res) => {
 //   const { email } = req.body;
@@ -20,8 +27,9 @@ const createUser = (email) => {
 // get a user from data base
 const getUserList = async (req, res) => {
   const { email } = req.query;
+  console.log('email --------' , email)
   await otakuzUserModel.find({ email: email }, (err, user) => {
-    if (!user[0]) createUser(email);
+    if (user.length <=0) createUser(email);
     // console.log('in create',user[0])
   });
 
@@ -36,7 +44,7 @@ const getUserList = async (req, res) => {
 const addAnime = async (req, res) => {
   const { email, id, name, url, img, description, rating, type, rate, start, end, followers } = req.body;
   await otakuzUserModel.find({ email: email }, (err, user) => {
-    if (!user[0]) createUser(email);
+    if (user.length <=0) createUser(email);
     // console.log(user[0]);
   });
   await otakuzUserModel.find({ email: email }, (err, user) => {
