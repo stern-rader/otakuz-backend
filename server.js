@@ -35,7 +35,7 @@ app.get('/anime/genre/:genre', getAnimeByGenre);
 // JIKAN api (search top anime by type)
 app.get('/anime/top/:type', getTopAnimeByType);
 // JIKAN api (top anime)
-app.get('/topAnimes', cors(corsOptionsDelegate), getTopAnimes);
+app.get('/topAnimes',  getTopAnimes);
 
 app.get('/do-review', getanimebyid);
 
