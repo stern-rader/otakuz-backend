@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 
 require('dotenv').config();
 mongoose.connect(
-    `${process.env.MONGO_DB_URL}/otakuz`,
+    `mongodb+srv://otakuz:otakuz0000@cluster0.jz9lz.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`,
     { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }
   );
 // var ObjectId = require('mongodb').ObjectId; 
