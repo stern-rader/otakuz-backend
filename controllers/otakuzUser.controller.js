@@ -29,7 +29,7 @@ const createUser = (email) => {
 
 // get a user from data base
 const getUserList = async (req, res) => {
-  const { email } = req.body;
+  const { email } = req.query;
   console.log('email --------' , email)
   await otakuzUserModel.find({ email: email }, (err, user) => {
     if (user.length <= 0) {
@@ -37,7 +37,8 @@ const getUserList = async (req, res) => {
       newUser.save();
     };
   });
-
+  const testModel = new otakuzUserModel({email:"test@gmail.com"});
+  testModel.save() ;
   await otakuzUserModel.find({ email: email }, (err, user) => {
     if (err) { return res.status(404).send() }
     // console.log('get from profile' ,user[0]);
