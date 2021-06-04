@@ -4,9 +4,9 @@ const mongoose = require('mongoose');
 
 require('dotenv').config();
 mongoose.connect(
-    `${process.env.MONGO_DB_URL}/otakuz`,
-    { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }
-  );
+  `mongodb+srv://otakuz:otakuz0000@cluster0.jz9lz.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`,
+  { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }
+);
 // save users comments in data base and save anime reviews if undefined
 const postComment = async (req, res) => {
   const { id, email, comment, date } = req.body;
