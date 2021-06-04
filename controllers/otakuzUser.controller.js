@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 
 require('dotenv').config();
 mongoose.connect(
-    `mongodb+srv://otakuz:otakuz0000@cluster0.jz9lz.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`,
+  `${process.env.MONGO_DB_URL}`,
     { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }
   );
 // var ObjectId = require('mongodb').ObjectId; 
@@ -24,13 +24,18 @@ const createUser = (email) => {
   // res.status(200).send('user was added');
 };
 
+
+
+
 // get a user from data base
 const getUserList = async (req, res) => {
   const { email } = req.query;
   console.log('email --------' , email)
   await otakuzUserModel.find({ email: email }, (err, user) => {
-    if (user.length <=0) createUser(email);
-    // console.log('in create',user[0])
+    if (user.length <= 0) {
+      const newUser = new otakuzUserModel({ email: email });
+      newUser.save();
+    };
   });
 
   await otakuzUserModel.find({ email: email }, (err, user) => {

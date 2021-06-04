@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 
 require('dotenv').config();
 mongoose.connect(
-  `mongodb+srv://otakuz:otakuz0000@cluster0.jz9lz.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`,
+  `${process.env.MONGO_DB_URL}`,
   { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }
 );
 // save users comments in data base and save anime reviews if undefined
@@ -36,8 +36,8 @@ const getComments = async (req, res) => {
   console.log('query id' , id);
   await reviewsModel.find({ id: id }, (err, anime) => {
     if (anime.length <= 0) {
-      const anime = new reviewsModel({ id: id });
-      anime.save();
+      const newAnime = new reviewsModel({ id: id });
+      newAnime.save();
     };
   });
   await reviewsModel.find({ id: id }, (err, anime) => {

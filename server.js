@@ -18,26 +18,13 @@ app.use(express.json());
 const Port = process.env.PORT || 3666;
 
 mongoose.connect(
-  `mongodb+srv://otakuz:otakuz0000@cluster0.jz9lz.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`,
+  `${process.env.MONGO_DB_URL}`,
   { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }
 );
 
 app.get('/', function (req, res) {
   res.send('"Curse the fiends, their children too. And their children, forever, true" - villagers of the Fishing Hamlet ')
 });
-
-// test cors
-var allowlist = ['https://otakuz.netlify.app/', 'https://otakuz.netlify.app/profile']
-var corsOptionsDelegate = function (req, callback) {
-  var corsOptions;
-  if (allowlist.indexOf(req.header('Origin')) !== -1) {
-    corsOptions = { origin: true } // reflect (enable) the requested origin in the CORS response
-  } else {
-    corsOptions = { origin: false } // disable CORS for this request
-  }
-  callback(null, corsOptions) // callback expects two parameters: error and options
-}
-
 
 
 // JIKAN
@@ -56,7 +43,7 @@ app.get('/do-review', getanimebyid);
 // add user to data base
 app.post('/otakuzUser', otakuzController.createUser);
 // get a user list from data base
-app.get('/otakuzUser', cors(corsOptionsDelegate) ,otakuzController.getUserList);
+app.get('/otakuzUser', otakuzController.getUserList);
 // delete user from data base
 app.delete('/otakuzUser/:id', otakuzController.deleteUser);
 // add anime to a user list in data base
