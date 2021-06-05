@@ -32,7 +32,7 @@ const getUserList = async (req, res) => {
   const { email } = req.query;
   console.log('email --------' , email)
   await otakuzUserModel.find({ email: email }, (err, user) => {
-    if (user.length <= 0) {
+    if (user.length === 0) {
       const newUser = new otakuzUserModel({ email: email });
       newUser.save();
     };
@@ -49,7 +49,7 @@ const getUserList = async (req, res) => {
 const addAnime = async (req, res) => {
   const { email, id, name, url, img, description, rating, type, rate, start, end, followers } = req.body;
   await otakuzUserModel.find({ email: email }, (err, user) => {
-    if (user.length <= 0) {
+    if (user.length === 0) {
       const newUser = new otakuzUserModel({ email: email });
       newUser.save();
     };
@@ -98,10 +98,26 @@ const deleteUser = async (req, res) => {
   });
 };
 
+const addUserTest = (req , res) => {
+  const {email} = req.query ;
+  const newUser = new otakuzUserModel({email:email});
+  newUser.save();
+  res.send(`it has been saved correctly  ${newUser}`);
+}
+
+const getUserTest = (req , res) => {
+  const {email} = req.query ;
+  otakuzUserModel.find({email:email} , (error , user) => {
+    res.send(`the user from the db  ${user[0]}`);
+  })
+}
+
 module.exports = {
   createUser,
   getUserList,
   addAnime,
   deleteAnime,
-  deleteUser
+  deleteUser,
+  addUserTest,
+  getUserList
 };
