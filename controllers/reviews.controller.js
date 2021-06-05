@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 
 require('dotenv').config();
 mongoose.connect(
-  `${process.env.MONGO_DB_URL}/otakuzDB`,
+  `${process.env.MONGO_DB_URL}`,
   { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }
 );
 // save users comments in data base and save anime reviews if undefined
