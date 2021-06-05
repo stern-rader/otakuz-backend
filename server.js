@@ -57,6 +57,9 @@ app.post('/reviews', reviews.postComment);
 // delete a review made by a user
 // app.delete('/reviews/:id', reviews.deleteComment);
 
+//test
+app.get('/testAddUser' , otakuzController.addUserTest);
+app.get('/testGetUser' , otakuzController.getUserList);
 
 app.listen(Port, () => {
   console.log(`server starts at port ${Port}`);
