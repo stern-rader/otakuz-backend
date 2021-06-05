@@ -37,8 +37,7 @@ const getUserList = async (req, res) => {
       newUser.save();
     };
   });
-  const testModel = new otakuzUserModel({email:"test@gmail.com"});
-  testModel.save() ;
+  
   await otakuzUserModel.find({ email: email }, (err, user) => {
     if (err) { return res.status(404).send() }
     // console.log('get from profile' ,user[0]);
