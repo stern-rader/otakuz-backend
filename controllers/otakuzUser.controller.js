@@ -98,19 +98,19 @@ const deleteUser = async (req, res) => {
   });
 };
 
-const addUserTest = (req , res) => {
-  const {email} = req.query ;
-  const newUser = new otakuzUserModel({email:email});
-  newUser.save();
-  res.send(`it has been saved correctly  ${newUser}`);
-}
+// const addUserTest = (req , res) => {
+//   const {email} = req.query ;
+//   const newUser = new otakuzUserModel({email:email});
+//   newUser.save();
+//   res.send(`it has been saved correctly  ${newUser}`);
+// }
 
-const getUserTest = (req , res) => {
-  const {email} = req.query ;
-  otakuzUserModel.find({email:email} , (error , user) => {
-    res.send(`the user from the db  ${user[0]}`);
-  })
-}
+// const getUserTest = (req , res) => {
+//   const {email} = req.query ;
+//   otakuzUserModel.find({email:email} , (error , user) => {
+//     res.send(`the user from the db  ${user[0]}`);
+//   })
+// }
 
 module.exports = {
   createUser,
@@ -118,6 +118,5 @@ module.exports = {
   addAnime,
   deleteAnime,
   deleteUser,
-  addUserTest,
-  getUserList
+  
 };
