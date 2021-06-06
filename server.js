@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 const getAnime = require('./components/anime');
 const getTopAnimes = require('./components/getTopAnimes');
 const getAnimeByGenre = require('./components/animeGenre');
@@ -15,12 +15,12 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const Port = process.env.PORT || 3666;
+const Port = process.env.PORT || 3004;
 
-mongoose.connect(
-  `${process.env.MONGO_DB_URL}`,
-  { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }
-);
+// mongoose.connect(
+//   `${process.env.MONGO_DB_URL}/otakuz`,
+//   { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }
+// );
 
 app.get('/', function (req, res) {
   res.send('"Curse the fiends, their children too. And their children, forever, true" - villagers of the Fishing Hamlet ')
@@ -58,8 +58,8 @@ app.post('/reviews', reviews.postComment);
 // app.delete('/reviews/:id', reviews.deleteComment);
 
 //test
-app.get('/testAddUser' , otakuzController.addUserTest);
-app.get('/testGetUser' , otakuzController.getUserList);
+// app.get('/testAddUser' , otakuzController.addUserTest);
+// app.get('/testGetUser' , otakuzController.getUserList);
 
 app.listen(Port, () => {
   console.log(`server starts at port ${Port}`);
